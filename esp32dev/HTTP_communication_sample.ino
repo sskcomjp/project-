@@ -3,11 +3,11 @@
 #include <string.h>
 
 //学校用
-//char ssid[] = "jikei-open-air";
-//char password[] = "open-wifi";
+//char ssid[] = "";
+//char password[] = "";
 //家用
-char ssid[] = "HUMAX-FC4EF-A";
-char password[] = "LWN3LEk4MjNaM";
+char ssid[] = "";
+char password[] = "";
 
 char data_lat[] = "36.3919";
 char data_lng[] = "137.2911";
