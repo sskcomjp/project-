@@ -106,7 +106,7 @@ while(True):
 
 
 
-    time.sleep(5)
+    time.sleep()
 
 
 
