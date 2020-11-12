@@ -215,9 +215,10 @@ void LED_Blinking() {
 
 }
 char unitV_serial() {
+  char str = '0';
   //シリアル通信で文字を受信
   if (Serial1.available() > 0) {
-    char str = '0';
+    
     
 
     str = Serial1.read();
@@ -225,8 +226,9 @@ char unitV_serial() {
 
 
 
-    return str;
+    
   }
+  return str;
 }
 
 
