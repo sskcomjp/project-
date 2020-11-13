@@ -4,7 +4,7 @@
 #include <string.h>
 #include <FastLED.h>
 #include <TinyGPS++.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <HTTPClient.h>
 
 int count_value = 50;
@@ -12,11 +12,12 @@ int count = count_value - 1;
 
 //wifi設定
 //学校用
-//char ssid[] = "";
-//char password[] = "";
+char ssid[] = "jikei-open-air";
+char password[] = "open-wifi";
 //家用
-char ssid[] = "";
-char password[] = "";
+//char ssid[] = "HUMAX-FC4EF-A";
+//char password[] = "LWN3LEk4MjNaM";
+
 
 
 
@@ -25,7 +26,7 @@ char password[] = "";
 
 //gpsの初期設定
 TinyGPSPlus gps;
-SoftwareSerial mySerial(14, 12); // RX, TX
+//SoftwareSerial mySerial(14, 12); // RX, TX
 float lat_data;
 float lng_data;
 
@@ -46,9 +47,9 @@ int servo_add_1 = 60;
 void gps_function() {
 
 
-  while (mySerial.available() > 0) {
+  while (Serial2.available()>0){//(mySerial.available() > 0) {
 
-    char c = mySerial.read();
+    char c = Serial2.read();//mySerial.read();
     //Serial.print(c);
     gps.encode(c);
     if (gps.location.isUpdated()) {
@@ -61,7 +62,7 @@ void gps_function() {
 
       lat_data = gps.location.lat();
       lng_data = gps.location.lng();
-      
+
       Serial.print("LAT=");
       Serial.println(lat_data, 6);
       Serial.print("LONG=");
@@ -218,16 +219,17 @@ char unitV_serial() {
   char str = '0';
   //シリアル通信で文字を受信
   if (Serial1.available() > 0) {
-    
-    
+
+
 
     str = Serial1.read();
 
 
 
 
-    
+
   }
+
   return str;
 }
 
@@ -250,9 +252,11 @@ void servo_control() {
 
 
 void setup() {
+  //mySerial.begin(9600); //gps
   Serial.begin(115200);
-  Serial1.begin(115200, SERIAL_8N1, 25, 26); //unitV
-  mySerial.begin(9600); //gps
+  Serial1.begin(9600, SERIAL_8N1, 25, 26); //unitV
+  Serial2.begin(9600, SERIAL_8N1, 14, 12); //gps
+  
 
   servo_1.attach(13);
 
@@ -296,6 +300,7 @@ void loop() {
 
 
 
+  
   LED_Blinking();
 
 
