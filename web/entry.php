@@ -1,10 +1,63 @@
+<?php
+
+   $data_lat;
+   $data_lng;
+   $data_delete;
+
+
+  if(isset($_GET['comment'])){
+           $data_lat = $_GET["comment"];
+
+  }
+  if(isset($_GET['comment2'])){
+          $data_lng =$_GET["comment2"];
+  }
+
+  if(isset($_GET['comment3'])){
+          $data_delete =$_GET["comment3"];
+  }
+
+
+
+  function file_open_write($data,$file){
+  $fp = fopen($file, 'ab');
+
+  if ($fp){
+          if (flock($fp, LOCK_EX)){
+          if (fwrite($fp,  $data.",") === FALSE){
+            //  print('ファイル書き込みに失敗しました<br>');
+          }else{
+             //  print($data.'をファイルに書き込みました<br>');
+
+          }
+
+          flock($fp, LOCK_UN);
+      }else{
+          print('ファイルロックに失敗しました<br>');
+      }
+  }
+
+  $flag = fclose($fp);
+
+  if ($flag){
+      print('無事クローズしました<br>');
+  }else{
+      print('クローズに失敗しました<br>');
+  }
+}
+
+  file_open_write($data_lat,"lat.csv");
+  file_open_write($data_lng,"lng.csv");
+
+  ?>
+
 <!DOCTYPE html>
   <html lang = "ja">
   <head>
   <meta charset = "UTF-8">
   <title>ソーシャルディスタンス</title>
   </head>
-  <body>
+  <body bgcolor="azure">
 
  <h1>緯度を入力</h1>
  <form action = "entry.php" method = "get">
