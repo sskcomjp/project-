@@ -1,0 +1,15 @@
+
+
+@charset "UTF-8";
+
+button#button{
+	width: 600px;
+	height: 300px;
+	font-size: 50px;
+}
+
+input#submit_button{
+	width:  600px;
+	height:  300px;
+	font-size: 50px
+}
